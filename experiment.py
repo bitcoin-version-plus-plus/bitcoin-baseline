@@ -1,7 +1,11 @@
-import os
 import json
-import time
+import os
+import re
 import subprocess
+import time
+import sys
+
+useConnectConfigurationOnTarget = True
 
 numSamples = 100000
 
@@ -32,6 +36,7 @@ def startTcpDump():
 	subprocess.Popen(['gnome-terminal -t "Bitcoin TCPDUMP Logger" -- python3 pcap_experiment/log_bitcoin_pcaps.py'], shell=True)
 
 def connectNode(address = '10.0.2.4'):
+	if useConnectConfigurationOnTarget: return
 	bitcoin('addnode ' + address + ' onetry')
 
 def disconnectNodes():
